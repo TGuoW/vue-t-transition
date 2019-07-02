@@ -1,6 +1,6 @@
 {
-  "name": "vue-t-select",
-  "version": "1.0.3",
+  "name": "vue-t-transition",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/vue-t-select.ssr.js",
   "module": "dist/vue-t-select.esm.js",

@@ -2,9 +2,9 @@
 <div>
     <button @click="resr">asda</button>
     <div class="aaa">
-        <button @click="resr">asda</button>
+        <!-- <button @click="resr">asda</button> -->
         <c-transition :isShow="ss" :needBg="true">
-            <div>1231</div>
+            <div style="width: 100px;height: 100px; background:#fff">1231</div>
         </c-transition>
     </div>
 </div>
@@ -14,10 +14,11 @@
 <script>
 import CTransition from './CTransition'
 import a from './entry'
+
 export default {
     data () {
         return {
-            ss: false,
+            ss: true,
             value: 'aa6aa',
             i: null,
             options: [
@@ -48,6 +49,10 @@ export default {
     components: {
         CTransition
     },
+    mounted () {
+        console.log(this)
+        console.log(this.$createElement)
+    },
     methods: {
         resr () {
             // this.ss = !this.ss
@@ -61,7 +66,17 @@ export default {
                 target: '.aaa',
                 render: <div>123</div>
             })
+
         }
     }
 }
 </script>
+
+<style scoped>
+    .aaa {
+        height: 400px;
+        width: 400px;
+        background: burlywood;
+    }
+</style>
+

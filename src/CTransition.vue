@@ -34,9 +34,9 @@ const addStyle = (options, instance) => {
   //     document.documentElement[scroll] +
   //     'px';
   // });
-  // ['height', 'width'].forEach(property => {
-  //   maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
-  // });
+  ['height', 'width'].forEach(property => {
+    maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
+  });
   const filterProperty = ['top', 'right', 'bottom', 'left']
   Object.keys(maskStyle).forEach(property => {
     !filterProperty.includes(property) && (instance.style[property] = maskStyle[property])
@@ -61,23 +61,13 @@ export default {
     position: {
       type: Array,
       default () {
-        return ['bottom','right']
+        return ['top','left']
       }
     },
     mainStyle: {
       type: Object,
       default () {
         return {}
-      }
-    }
-  },
-  computed: {
-    realIsShow: {
-      get: function () {
-        return this.isShow
-      },
-      set: function (newValue) {
-
       }
     }
   },
@@ -95,7 +85,7 @@ export default {
       this.close()
     }
   },
-  render () {
+  render (h) {
     const { position } = this
     this.$nextTick(() => {
       const { target } = this
@@ -113,7 +103,7 @@ export default {
     })
     const bgClass = ['c-transition-bg']
     const mainClass = ['c-transition-main']
-    const mainStyle = {...this.mainStyle}
+    const mainStyle = Object.assign({}, this.mainStyle)
     position.forEach(property => {
       mainStyle[property] = 0
     })
@@ -126,15 +116,35 @@ export default {
       bgClass.push('c-transition-bg-bg')
     }
     mainClass.push('c-transition-main-' + position[0] || 'left')
-    return (
-      <transition name="slide-fade"  on-after-leave={this.handleAfterLeave}>
-        {this.isShow && <div ref="bgElm" class={bgClass} on-click={this.handleClick}>
-          <div ref="mainElm" class={mainClass} style={mainStyle}>
-            {this.$slots.default}
-          </div>
-        </div>}
-      </transition>
-    )
+    return h('transition', {
+      attrs: {
+        name: 'slide-fade',
+      },
+      on: {
+        afterLeave: this.handleAfterLeave
+      }
+    }, [this.isShow && h('div', {
+      ref: 'bgElm',
+      class: bgClass,
+      on: {
+        click: this.handleClick
+      }
+    }, [
+      h('div', {
+        ref: 'mainElm',
+        class: mainClass,
+        style: mainStyle
+      }, this.$slots.default)
+    ])])
+    // return (
+    //   <transition name="slide-fade"  on-after-leave={this.handleAfterLeave}>
+    //     {this.isShow && <div ref="bgElm" class={bgClass} on-click={this.handleClick}>
+    //       <div ref="mainElm" class={mainClass} style={mainStyle}>
+    //         {this.$slots.default[0]}
+    //       </div>
+    //     </div>}
+    //   </transition>
+    // )
   }
 }
 </script>

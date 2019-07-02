@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils'
 import Vue from 'vue/dist/vue'
 import CTransition from '../src/CTransition.vue'
 import CTransitionConstructor from '../src/entry'
-import { doesNotReject } from 'assert';
 
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
@@ -39,33 +38,46 @@ const createVue = function(Compo, mounted = false) {
   return new Vue(Compo).$mount(mounted === false ? null : createElm());
 };
 
+const $i = CTransitionConstructor({
+  target: 'body',
+  render: ''
+})
+
+const h = $i.$createElement
 
 describe('CTransition', () => {
-  it('renders props.msg when passed', (done) => {
+  it('position', (done) => {
+    const vm = createVue({
+      template: `
+      <div style="width: 400px; height: 400px" class="test"></div>
+    `,
+    }, true);
+    const instance = CTransitionConstructor({
+      needBg: true,
+      target: '.test',
+      render: <div>123</div>
+    })
+    Vue.prototype.$nextTick(() => {
+      const {mainElm} = instance.$refs
+      expect(mainElm.classList.contains('c-transition-main-top')).toBe(true);
+      done()
+    })
+
+  })
+  it('position', () => {
     const vm = createVue({
       components: { CTransition },
       template: `
-      <div>
+      <div style="width: 400px; height: 400px">
         <CTransition :isShow="true" :needBg="true">
           <div style="width:100px;height:100px;"></div>
         </CTransition>
       </div>
     `,
     }, true);
-    Vue.prototype.$nextTick(() => {
-
-      const element = document.querySelector('.c-transition-main')
-      // const height = getStyle(element, 'height')
-      // const width = getStyle(element, 'width')
-      const child = element.children[0]
-      const childHeight = getStyle(child, 'height')
-      const childWidth = getStyle(child, 'width')
-      const width = '100px'
-      const height = '100px'
-
-      expect([height, width]).toEqual([childHeight, childWidth])
-      done()
-    })
+    const instance = vm.$children[0]
+    const {mainElm} = instance.$refs
+    expect(mainElm.classList.contains('c-transition-main-top')).toBe(true);
   })
 
   // it('renders default message if not passed a prop', () => {

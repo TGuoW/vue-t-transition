@@ -46,7 +46,7 @@ if (!argv.format || argv.format === 'es') {
   const esConfig = {
     ...baseConfig,
     output: {
-      file: 'dist/vue-t-select.esm.js',
+      file: 'dist/vue-t-transition.esm.js',
       format: 'esm',
       exports: 'named',
     },
@@ -70,9 +70,9 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/vue-t-select.ssr.js',
+      file: 'dist/vue-t-transition.ssr.js',
       format: 'cjs',
-      name: 'VueTSelect',
+      name: 'VueTTransition',
       exports: 'named',
       globals,
     },
@@ -97,9 +97,9 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'dist/vue-t-select.min.js',
+      file: 'dist/vue-t-transition.min.js',
       format: 'iife',
-      name: 'VueTSelect',
+      name: 'VueTTransition',
       exports: 'named',
       globals,
     },
