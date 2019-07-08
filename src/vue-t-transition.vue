@@ -44,7 +44,7 @@ const addStyle = (options, instance) => {
 };
 
 export default {
-  name: 'CTransition',
+  name: 'vue-t-ransition',
   props: {
     isShow: {
       type: Boolean,
@@ -55,7 +55,7 @@ export default {
     needBg: {
       type: Boolean,
       default () {
-        return false
+        return true
       }
     },
     position: {
@@ -96,7 +96,7 @@ export default {
           targetElm.style.position = 'relative'
         }
       }
-      if (mainElm && !this.render) {
+      if (mainElm) {
         const sourceElm = this.$slots.default[0].elm
         sourceElm && addStyle({target: sourceElm}, mainElm)
       }
@@ -104,9 +104,23 @@ export default {
     const bgClass = ['c-transition-bg']
     const mainClass = ['c-transition-main']
     const mainStyle = Object.assign({}, this.mainStyle)
+
+    const positionLeft = ['left', 'right']
+    const positionTop = ['top', 'bottom']
+
     position.forEach(property => {
       mainStyle[property] = 0
     })
+
+    if (position.length === 1) {
+      positionLeft.includes(position[0]) && positionTop.forEach(property => {
+        mainStyle[property] = 0
+      })
+      positionTop.includes(position[0]) && positionLeft.forEach(property => {
+        mainStyle[property] = 0
+      })
+      mainStyle['margin'] = 'auto'
+    }
 
     if (this.isShow) {
       bgClass.push('c-transition-block')

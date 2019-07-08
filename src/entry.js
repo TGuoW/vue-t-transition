@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Main from './CTransition.vue'
+import Main from './install'
 const CTransiionConstructor = Vue.extend(Object.assign({}, Main))
 
 let instance
@@ -28,4 +28,4 @@ export default function (options) {
   return instance.vm
 }
 
-export const CTransition = Main
+export const VueTTransition = Main

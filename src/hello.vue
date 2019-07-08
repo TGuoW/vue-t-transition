@@ -3,7 +3,7 @@
     <button @click="resr">asda</button>
     <div class="aaa">
         <!-- <button @click="resr">asda</button> -->
-        <c-transition :isShow="ss" :needBg="true">
+        <c-transition :isShow="ss" :position="['bottom', 'right']">
             <div style="width: 100px;height: 100px; background:#fff">1231</div>
         </c-transition>
     </div>
@@ -12,13 +12,14 @@
 </template>
 
 <script>
-import CTransition from './CTransition'
-import a from './entry'
+import CTransition from './vue-t-transition'
+// import a from './entry'
+import a from '../dist/vue-t-transition.esm.js'
 
 export default {
     data () {
         return {
-            ss: true,
+            ss: false,
             value: 'aa6aa',
             i: null,
             options: [
@@ -49,10 +50,6 @@ export default {
     components: {
         CTransition
     },
-    mounted () {
-        console.log(this)
-        console.log(this.$createElement)
-    },
     methods: {
         resr () {
             // this.ss = !this.ss
@@ -64,6 +61,7 @@ export default {
             this.i = a({
                 needBg: true,
                 target: '.aaa',
+                position: ['left'],
                 render: <div>123</div>
             })
 
