@@ -3,7 +3,7 @@
     <button @click="resr">asda</button>
     <div class="aaa">
         <!-- <button @click="resr">asda</button> -->
-        <c-transition :isShow="ss" :position="['bottom', 'right']">
+        <c-transition v-model="ss" :position="['bottom', 'right']">
             <div style="width: 100px;height: 100px; background:#fff">1231</div>
         </c-transition>
     </div>
@@ -52,18 +52,18 @@ export default {
     },
     methods: {
         resr () {
-            this.ss = !this.ss
-            // if (this.i && this.i.isShow) {
-            //     this.i.close()
-            //     this.i = null
-            //     return
-            // }
-            // this.i = a({
-            //     needBg: true,
-            //     target: '.aaa',
-            //     position: ['left'],
-            //     render: this.$createElement('div', 1234)
-            // })
+            // this.ss = !this.ss
+            if (this.i && this.i.isShow) {
+                this.i.close()
+                this.i = null
+                return
+            }
+            this.i = a({
+                needBg: true,
+                target: '.aaa',
+                position: ['left'],
+                render: this.$createElement('div', 1234)
+            })
 
         }
     }

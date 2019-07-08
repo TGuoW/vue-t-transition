@@ -45,6 +45,9 @@ const addStyle = (options, instance) => {
 
 export default {
   name: 'vue-t-ransition',
+  model: {
+    prop: 'isShow'
+  },
   props: {
     isShow: {
       type: Boolean,
@@ -73,7 +76,7 @@ export default {
   },
   methods: {
     close () {
-      this.isShow = false
+      this.$emit('input', false)
     },
     handleAfterLeave () {
       if (this.render) {
