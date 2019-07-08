@@ -52,18 +52,18 @@ export default {
     },
     methods: {
         resr () {
-            // this.ss = !this.ss
-            if (this.i && this.i.isShow) {
-                this.i.close()
-                this.i = null
-                return
-            }
-            this.i = a({
-                needBg: true,
-                target: '.aaa',
-                position: ['left'],
-                render: <div>123</div>
-            })
+            this.ss = !this.ss
+            // if (this.i && this.i.isShow) {
+            //     this.i.close()
+            //     this.i = null
+            //     return
+            // }
+            // this.i = a({
+            //     needBg: true,
+            //     target: '.aaa',
+            //     position: ['left'],
+            //     render: this.$createElement('div', 1234)
+            // })
 
         }
     }

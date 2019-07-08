@@ -1,6 +1,6 @@
 {
   "name": "vue-t-transition",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/vue-t-transition.ssr.js",
   "module": "dist/vue-t-transition.esm.js",
